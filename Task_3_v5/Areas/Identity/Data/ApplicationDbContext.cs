@@ -32,6 +32,8 @@ namespace Task_3_v5
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
             builder.Property(u => u.FirstName).HasMaxLength(255);
+            builder.Property(u => u.Status).HasDefaultValue("active");
+            builder.Property(u => u.RegistrationTime).HasDefaultValue(DateTime.Now);
         }
     }
 }

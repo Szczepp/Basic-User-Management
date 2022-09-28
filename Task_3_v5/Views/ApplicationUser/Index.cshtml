@@ -1,0 +1,95 @@
+﻿@model Task_3_v5.Models.ApplicationUserModel
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+
+@using Microsoft.AspNetCore.Identity;
+@using Task_3_v5.Areas.Identity.Data
+@inject UserManager<ApplicationUser> UserManager
+
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="content">
+
+    <div class="container">
+        <h2 class="mb-5"> User Managment </h2>
+        <div class="table-responsive custom-table-responsive">
+            <form id="user_managment" method="post" asp-controller="ApplicationUser">
+                <div class="container">
+                    <button value="block" formaction="@Url.Action("block")" class="btn btn-danger btn-lg">
+                        Block
+                    </button>
+                    <button value="delete" formaction="@Url.Action("delete")">
+                        <h3>
+                            <i class="bi bi-trash"></i>
+                        </h3>
+                    </button>
+                    <button value="unblock" formaction="@Url.Action("unblock")">
+                        <h3>
+                            <i class="bi bi-unlock"></i>
+                        </h3>
+                    </button>
+                </div>
+                <table class="table custom-table">
+                    <thead>
+                        <tr>
+
+                            <th scope="col">
+                                <label class="control control--checkbox">
+                                    <input type="checkbox" class="js-check-all" />
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </th>
+
+                            <th scope="col">Id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">E-mail</th>
+                            <th scope="col">Last login time</th>
+                            <th scope="col">Registration time</th>
+                            <th scope="col">Status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (ApplicationUser user in UserManager.Users)
+                        {
+                            <tr scope="row">
+                                <th scope="row">
+                                    <label class="control control--checkbox">
+                                        <input asp-for="UserId" type="checkbox" value="@user.Id" />
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </th>
+                                <td>
+                                    @user.Id
+                                </td>
+                                <td>
+                                    @user.FirstName
+                                </td>
+                                <td>
+                                    @user.Email
+                                </td>
+                                <td> @user.LastLoginTime </td>
+                                <td> @user.RegistrationTime </td>
+                                <td> @user.Status </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </form>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<script src="~/js/popper.min.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/main.js"></script>

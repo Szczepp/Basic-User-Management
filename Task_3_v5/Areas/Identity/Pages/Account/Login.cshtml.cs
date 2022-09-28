@@ -85,7 +85,10 @@ namespace Task_3_v5.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    _logger.LogInformation("User logged in." + result);
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    user.LastLoginTime = DateTime.Now;
+                    await _userManager.UpdateAsync(user);
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

@@ -85,6 +85,8 @@ namespace Task_3_v5.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    user.RegistrationTime = DateTime.Now;
+                    await _userManager.UpdateAsync(user);
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
