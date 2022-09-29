@@ -1,1 +1,0 @@
-web: cd $HOME/heroku_output/WebAPI && dotnet ./Task_3_v5.dll --server.urls http://+:$PORT ${CORE_ENVIRONMENT}
