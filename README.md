@@ -1,4 +1,4 @@
-# Task_3_v5
+## This is a small task made during the remote internship
 User Managment panel with authentication
 
 ## Requirements
